@@ -1,0 +1,38 @@
+INPUT players=4 joysticks=6
+PASS 4 logical input players
+PASS lobby slots match input players
+PASS P2 joins through normal input scan
+PASS P3 joins through normal input scan
+PASS P4 joins through normal input scan
+PASS last player leaves lobby
+PASS last player rejoins lobby
+PASS local Photon room created
+PASS offline capacity is 4
+PASS all players ready
+PASS 4 local characters spawned
+PASS unique input assignments
+PASS unique player identities
+PASS physical controller owners survive scene change
+PASS P1 retains enabled controller mappings
+PASS P2 retains enabled controller mappings
+PASS P3 retains enabled controller mappings
+PASS P4 retains enabled controller mappings
+PASS camera tracks every character
+PASS gameplay values retain four-player settings at eight players
+PASS P1 receives its own movement input
+PASS other characters receive no shared movement input
+PASS P2 receives its own movement input
+PASS other characters receive no shared movement input
+PASS P3 receives its own movement input
+PASS other characters receive no shared movement input
+PASS P4 receives its own movement input
+PASS other characters receive no shared movement input
+PASS last player picks up bucket through game grab method
+PASS last player drops bucket
+PASS shop has colors for every player
+PASS last player opens shop
+PASS game-over flow accepts expanded roster
+PASS restart spawns the full roster again
+PASS returns to main menu after expanded game
+PASS new lobby resets roster and retains slots
+SMOKE COMPLETE failures=0

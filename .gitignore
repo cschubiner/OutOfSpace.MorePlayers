@@ -1,0 +1,12 @@
+bin/
+obj/
+*.user
+*.suo
+.vs/
+.installer/
+*.pdb
+*.cache
+*.zip
+BepInEx/
+work/
+Out of Space_Data/

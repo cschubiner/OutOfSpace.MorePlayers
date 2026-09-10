@@ -1,0 +1,92 @@
+INPUT players=16 joysticks=6
+PASS 16 logical input players
+PASS lobby slots match input players
+PASS P2 joins through normal input scan
+PASS P3 joins through normal input scan
+PASS P4 joins through normal input scan
+PASS P5 joins through normal input scan
+PASS P6 joins through normal input scan
+PASS P7 joins through normal input scan
+PASS P8 joins through normal input scan
+PASS P9 joins through normal input scan
+PASS P10 joins through normal input scan
+PASS P11 joins through normal input scan
+PASS P12 joins through normal input scan
+PASS P13 joins through normal input scan
+PASS P14 joins through normal input scan
+PASS P15 joins through normal input scan
+PASS P16 joins through normal input scan
+PASS last player leaves lobby
+PASS last player rejoins lobby
+PASS local Photon room created
+PASS offline capacity is 16
+PASS all players ready
+PASS 16 local characters spawned
+PASS unique input assignments
+PASS unique player identities
+PASS physical controller owners survive scene change
+PASS P1 retains enabled controller mappings
+PASS P2 retains enabled controller mappings
+PASS P3 retains enabled controller mappings
+PASS P4 retains enabled controller mappings
+PASS P5 retains enabled controller mappings
+PASS P6 retains enabled controller mappings
+PASS camera tracks every character
+PASS gameplay values retain four-player settings at eight players
+PASS P1 receives its own movement input
+PASS other characters receive no shared movement input
+P1 movement distance=1.81889
+PASS P2 receives its own movement input
+PASS other characters receive no shared movement input
+P2 movement distance=2.244016
+PASS P3 receives its own movement input
+PASS other characters receive no shared movement input
+P3 movement distance=2.061516
+PASS P4 receives its own movement input
+PASS other characters receive no shared movement input
+P4 movement distance=1.564956
+PASS P5 receives its own movement input
+PASS other characters receive no shared movement input
+P5 movement distance=1.841655
+PASS P6 receives its own movement input
+PASS other characters receive no shared movement input
+P6 movement distance=1.770327
+PASS P7 receives its own movement input
+PASS other characters receive no shared movement input
+P7 movement distance=1.800971
+PASS P8 receives its own movement input
+PASS other characters receive no shared movement input
+P8 movement distance=0.7332541
+PASS P9 receives its own movement input
+PASS other characters receive no shared movement input
+P9 movement distance=1.793189
+PASS P10 receives its own movement input
+PASS other characters receive no shared movement input
+P10 movement distance=1.202635
+PASS P11 receives its own movement input
+PASS other characters receive no shared movement input
+P11 movement distance=1.132117
+PASS P12 receives its own movement input
+PASS other characters receive no shared movement input
+P12 movement distance=0.4130508
+PASS P13 receives its own movement input
+PASS other characters receive no shared movement input
+P13 movement distance=1.278755
+PASS P14 receives its own movement input
+PASS other characters receive no shared movement input
+P14 movement distance=1.471271
+PASS P15 receives its own movement input
+PASS other characters receive no shared movement input
+P15 movement distance=0.8148966
+PASS P16 receives its own movement input
+PASS other characters receive no shared movement input
+P16 movement distance=0.1948625
+PASS last player picks up bucket through game grab method
+PASS last player drops bucket
+PASS shop has colors for every player
+PASS last player opens shop
+PASS game-over flow accepts expanded roster
+PASS restart spawns the full roster again
+PASS returns to main menu after expanded game
+PASS new lobby resets roster and retains slots
+SMOKE COMPLETE failures=0

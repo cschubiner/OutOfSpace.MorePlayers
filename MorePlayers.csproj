@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>OutOfSpace.MorePlayers</AssemblyName>
+    <Version>0.1.0</Version>
+    <GameDir Condition="'$(GameDir)' == ''">G:\SteamLibrary\steamapps\common\Out of Space</GameDir>
+    <BepInExDir Condition="'$(BepInExDir)' == ''">$(GameDir)\BepInEx</BepInExDir>
+    <Managed>$(GameDir)\Out of Space_Data\Managed</Managed>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="src\*.cs" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net472" Version="1.0.3" PrivateAssets="all" />
+    <Reference Include="$(Managed)\Assembly-CSharp.dll;$(Managed)\Assembly-CSharp-firstpass.dll;$(Managed)\Rewired_Core.dll;$(Managed)\PhotonUnityNetworking.dll;$(Managed)\PhotonRealtime.dll;$(Managed)\Photon3Unity3D.dll;$(Managed)\Cinemachine.dll;$(Managed)\Unity.TextMeshPro.dll;$(Managed)\UnityEngine*.dll" Private="false" />
+    <Reference Include="$(BepInExDir)\core\BepInEx.dll;$(BepInExDir)\core\0Harmony.dll" Private="false" />
+  </ItemGroup>
+</Project>
