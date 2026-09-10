@@ -2,7 +2,9 @@
 
 A working prototype for **4–16 players on one Windows PC**. Default: 16 available slots. Tested against Steam build **6616527**, game **v1.2.4b13**, Unity **2018.2.21f1**.
 
-![Sixteen local characters in the automated gameplay test](sixteen-player-game.png)
+![Local co-op gameplay with the More Local Players mod](couch-coop-gameplay.png)
+
+Gameplay screenshot provided by Clay.
 
 Download this repository as a ZIP using GitHub's **Code → Download ZIP**, extract it, and run `install.ps1` as described below. The compiled plugin is included in `release/`.
 
@@ -52,6 +54,8 @@ The game assembly and Rewired assembly hashes are checked at startup. An unrecog
 ## Verification and limits
 
 See [VALIDATION.md](VALIDATION.md) for the final test results. Sixteen logical players and characters were tested with simulated game input. The connected physical devices were enumerated and their assignments checked, but sixteen physical gamepads and a full couch session have not been tested.
+
+The automated test also includes screenshots of the [sixteen-player game](sixteen-player-game.png) and [sixteen-slot lobby](sixteen-player-lobby.png).
 
 This remains a prototype: expect crowding on small ships, repeated clothing textures, and possible balance issues. P1–P16 labels and colored indicators distinguish players. Ship size and achievements are unchanged. Use the ship sizes your save already unlocks.
 
