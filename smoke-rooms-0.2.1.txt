@@ -1,0 +1,91 @@
+PASS room-size lobby row exists
+PASS click changes room size
+PASS left navigation decreases room size
+PASS +40% ship loads and spawns a player
+LIVE min=4 max=9 radius=12 cells=24 rooms=6
+PASS generated rooms have doors
+PASS SMALL/0 retries do not rescale
+SAMPLE SMALL option=0 requested=6 avg floor=5.6 rooms=60 entrances=10/10
+PASS SMALL/0 all sampled ships have an entrance
+PASS SMALL/0 varied room areas: 4,5,6,7
+PASS SMALL/1 retries do not rescale
+SAMPLE SMALL option=1 requested=6 avg floor=6.8 rooms=60 entrances=10/10
+PASS SMALL/1 all sampled ships have an entrance
+PASS SMALL/1 varied room areas: 4,5,6,7,8,9,10
+AREA RATIO SMALL/1 = 1.22
+PASS SMALL average floor area increases at option 1
+PASS SMALL/2 retries do not rescale
+SAMPLE SMALL option=2 requested=6 avg floor=7.9 rooms=60 entrances=10/10
+PASS SMALL/2 all sampled ships have an entrance
+PASS SMALL/2 varied room areas: 4,5,6,7,8,9,10,11,12
+AREA RATIO SMALL/2 = 1.42
+PASS SMALL average floor area increases at option 2
+PASS SMALL/3 retries do not rescale
+SAMPLE SMALL option=3 requested=6 avg floor=9.8 rooms=60 entrances=10/10
+PASS SMALL/3 all sampled ships have an entrance
+PASS SMALL/3 varied room areas: 4,6,7,8,9,10,11,12,13,14,15
+AREA RATIO SMALL/3 = 1.75
+PASS SMALL average floor area increases at option 3
+PASS SMALL/4 retries do not rescale
+SAMPLE SMALL option=4 requested=6 avg floor=10.8 rooms=60 entrances=10/10
+PASS SMALL/4 all sampled ships have an entrance
+PASS SMALL/4 varied room areas: 5,6,7,8,9,10,11,12,13,14,15,16,17,18
+AREA RATIO SMALL/4 = 1.93
+PASS SMALL average floor area increases at option 4
+PASS MEDIUM/0 retries do not rescale
+SAMPLE MEDIUM option=0 requested=9 avg floor=5.8 rooms=89 entrances=10/10
+PASS MEDIUM/0 all sampled ships have an entrance
+PASS MEDIUM/0 varied room areas: 4,5,6,7,8,9
+PASS MEDIUM/1 retries do not rescale
+SAMPLE MEDIUM option=1 requested=9 avg floor=7.1 rooms=90 entrances=10/10
+PASS MEDIUM/1 all sampled ships have an entrance
+PASS MEDIUM/1 varied room areas: 4,5,6,7,8,9,10,11
+AREA RATIO MEDIUM/1 = 1.22
+PASS MEDIUM average floor area increases at option 1
+PASS MEDIUM/2 retries do not rescale
+SAMPLE MEDIUM option=2 requested=9 avg floor=8.3 rooms=89 entrances=10/10
+PASS MEDIUM/2 all sampled ships have an entrance
+PASS MEDIUM/2 varied room areas: 4,6,7,8,9,10,11,12,13
+AREA RATIO MEDIUM/2 = 1.43
+PASS MEDIUM average floor area increases at option 2
+PASS MEDIUM/3 retries do not rescale
+SAMPLE MEDIUM option=3 requested=9 avg floor=9.9 rooms=90 entrances=10/10
+PASS MEDIUM/3 all sampled ships have an entrance
+PASS MEDIUM/3 varied room areas: 4,6,7,8,9,10,11,12,13,14,15
+AREA RATIO MEDIUM/3 = 1.71
+PASS MEDIUM average floor area increases at option 3
+PASS MEDIUM/4 retries do not rescale
+SAMPLE MEDIUM option=4 requested=9 avg floor=11.2 rooms=90 entrances=10/10
+PASS MEDIUM/4 all sampled ships have an entrance
+PASS MEDIUM/4 varied room areas: 5,6,7,8,9,10,11,12,13,14,15,16,17,18
+AREA RATIO MEDIUM/4 = 1.92
+PASS MEDIUM average floor area increases at option 4
+PASS LARGE/0 retries do not rescale
+SAMPLE LARGE option=0 requested=12 avg floor=5.9 rooms=119 entrances=10/10
+PASS LARGE/0 all sampled ships have an entrance
+PASS LARGE/0 varied room areas: 4,5,6,7,8,9
+PASS LARGE/1 retries do not rescale
+SAMPLE LARGE option=1 requested=12 avg floor=7.3 rooms=120 entrances=10/10
+PASS LARGE/1 all sampled ships have an entrance
+PASS LARGE/1 varied room areas: 4,5,6,7,8,9,10,11
+AREA RATIO LARGE/1 = 1.23
+PASS LARGE average floor area increases at option 1
+PASS LARGE/2 retries do not rescale
+SAMPLE LARGE option=2 requested=12 avg floor=8.4 rooms=118 entrances=10/10
+PASS LARGE/2 all sampled ships have an entrance
+PASS LARGE/2 varied room areas: 4,6,7,8,9,10,11,12,13
+AREA RATIO LARGE/2 = 1.43
+PASS LARGE average floor area increases at option 2
+PASS LARGE/3 retries do not rescale
+SAMPLE LARGE option=3 requested=12 avg floor=9.9 rooms=120 entrances=10/10
+PASS LARGE/3 all sampled ships have an entrance
+PASS LARGE/3 varied room areas: 4,5,6,7,8,9,10,11,12,13,14,15
+AREA RATIO LARGE/3 = 1.68
+PASS LARGE average floor area increases at option 3
+PASS LARGE/4 retries do not rescale
+SAMPLE LARGE option=4 requested=12 avg floor=11.4 rooms=120 entrances=10/10
+PASS LARGE/4 all sampled ships have an entrance
+PASS LARGE/4 varied room areas: 5,6,7,8,9,10,11,12,13,14,15,16,17,18,20
+AREA RATIO LARGE/4 = 1.93
+PASS LARGE average floor area increases at option 4
+ROOM TEST COMPLETE failures=0

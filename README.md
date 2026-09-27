@@ -21,16 +21,17 @@ The keyboard shares its configured player slot with that player's controller, as
 
 The local lobby has a separate **ROOM SIZE** button. Click it or press Confirm to cycle choices; left/right adjusts it when selected. The choice is saved and applies to newly generated ships, including a match restart.
 
-| Setting | Interior dimension multiplier |
+| Setting | Target average floor area |
 | --- | --- |
 | Standard | Original game |
-| Roomy | 1.5× |
-| Spacious (default) | 2× |
-| Vast | 2.5× |
+| +20% | 1.2× |
+| +40% (default) | 1.4× |
+| +70% | 1.7× |
+| 2× | 2× (maximum) |
 
-These change the room-generation dimensions and floor-area limit. Small/Medium/Large still determines the requested number of rooms. Bigger rooms naturally spread the ship across more space; actual floor area varies with the seed and overlapping room shapes. Players, furniture, and doors keep their normal size. Online games and the tutorial retain the original room sizes.
+These are approximate average floor-area targets, not width/length multipliers or a fixed size for every room. The stock random dimension draws and overlapping-room shape generation remain in use. Each sampled interior dimension is scaled using an area-based multiplier, with seeded probabilistic rounding to whole tiles, and the floor-area cap is adjusted. Small calibration offsets compensate for floor lost to overlap and doorway trimming. Rooms still vary in size and shape; the same seed at different settings need not produce the same layout. Small/Medium/Large still determines the requested number of rooms. Bigger rooms naturally spread the ship across more space. Players, furniture, and doors keep their normal size. Online games and the tutorial retain the original room sizes.
 
-The setting is also available as `[Rooms] Size = 0/1/2/3` in the configuration file. The plugin corrects a stock entrance-floor sorting bug that otherwise crashes dirt placement in larger rooms.
+The setting is also available as `[Rooms] Size = 0/1/2/3/4` in the configuration file. Existing indices now select the gentler presets (old Spacious, index 2, becomes +40%). The plugin corrects a stock entrance-floor sorting bug that otherwise crashes dirt placement in larger rooms.
 
 The game creates `BepInEx/config/local.outofspace.moreplayers.cfg` on first launch. Close the game before editing.
 

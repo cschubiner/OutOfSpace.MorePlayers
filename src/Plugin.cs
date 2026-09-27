@@ -16,7 +16,7 @@ using UnityEngine.SceneManagement;
 
 namespace OutOfSpace.MorePlayers
 {
-    [BepInPlugin(Id, "More Local Players", "0.2.0")]
+    [BepInPlugin(Id, "More Local Players", "0.2.1")]
     public sealed class Plugin : BaseUnityPlugin
     {
         public const string Id = "local.outofspace.moreplayers";
@@ -39,7 +39,7 @@ namespace OutOfSpace.MorePlayers
         {
             Log = Logger;
             RoomSizes.Setting = Config.Bind("Rooms", "Size", 2,
-                new ConfigDescription("Room size: 0 Standard, 1 Roomy, 2 Spacious, 3 Vast. Also adjustable in the local lobby. Applies to newly generated ships.", new AcceptableValueRange<int>(0, 3)));
+                new ConfigDescription("Average room floor area: 0 Standard, 1 +20%, 2 +40%, 3 +70%, 4 2x. Also adjustable in the local lobby. Applies to newly generated ships.", new AcceptableValueRange<int>(0, 4)));
             Limit = Config.Bind("Players", "MaxLocalPlayers", 16,
                 new ConfigDescription("Restart required. Local slots, from four to sixteen. Hardware controller capacity depends on the input backend.", new AcceptableValueRange<int>(4, 16))).Value;
             RawInput = Config.Bind("Input", "DisableXInput", false,
@@ -60,7 +60,7 @@ namespace OutOfSpace.MorePlayers
                 foreach (var method in typeof(GameValue).GetMethods().Where(m => m.Name == "op_Implicit"))
                     harmony.Patch(method, transpiler: new HarmonyMethod(typeof(Plugin), nameof(ClampBalanceCount)));
                 Ready = true;
-                Log.LogInfo("More Local Players 0.2.0 enabled; configured slots=" + Limit + "; F8 diagnostics.");
+                Log.LogInfo("More Local Players 0.2.1 enabled; configured slots=" + Limit + "; F8 diagnostics.");
             }
             catch (Exception ex)
             {
@@ -136,7 +136,7 @@ namespace OutOfSpace.MorePlayers
 
         internal static string Diagnostics()
         {
-            var lines = new List<string> { "More Local Players 0.2.0 | " + SceneManager.GetActiveScene().name,
+            var lines = new List<string> { "More Local Players 0.2.1 | " + SceneManager.GetActiveScene().name,
                 "Configured: " + Limit + " | logical players: " + ReInput.players.playerCount + " | detected controllers: " + ReInput.controllers.joystickCount,
                 "Mode: " + (Local ? "Local" : "Online (stock four-player limit)") };
             foreach (var p in ReInput.players.Players)

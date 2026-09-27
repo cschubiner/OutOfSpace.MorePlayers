@@ -1,5 +1,13 @@
 # Validation history
 
+## Version 0.2.1 — gentler area presets
+
+Replaces the oversized dimension presets with approximate average floor-area targets: Standard, +20%, +40%, +70%, and 2x. Default index 2 now means +40%. The generator still samples random dimensions and creates overlapping shapes; seeded probabilistic rounding avoids rounding every small fractional increase up to a full tile. Small calibration offsets compensate for overlap and doorway trimming. No fixed room template or uniform room size is imposed.
+
+The private runtime harness checks all five settings across Small/Medium/Large with ten seeds each, entrance generation with stock-style retries, noncompounding settings, multiple distinct room areas, and increasing average floor areas. It also checks the lobby button and loads a +40% ship into gameplay. The concise results are in `smoke-rooms-0.2.1.txt`; these are generation samples and a gameplay smoke test, not full-round balance testing.
+
+The final run had zero failed assertions. Measured average-area ratios versus Standard were 1.22–1.23, 1.42–1.43, 1.68–1.75, and 1.92–1.93 respectively. Each preset retained multiple room areas. Existing material/web-endpoint errors appeared, plus a `LoopManager.OnDisable` null reference during test-process shutdown after completion; no generation or gameplay-load exception occurred.
+
 ## Version 0.2.0 — room size
 
 Tested against the same installed Steam build described below, using a private game copy and synthetic input. Progression writes and Steam achievement calls were blocked in the test harness.

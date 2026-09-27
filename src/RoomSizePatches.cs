@@ -13,9 +13,48 @@ namespace OutOfSpace.MorePlayers
     internal static class RoomSizes
     {
         internal static ConfigEntry<int> Setting;
-        internal static readonly string[] Names = { "STANDARD", "ROOMY", "SPACIOUS", "VAST" };
-        internal static readonly float[] Scales = { 1f, 1.5f, 2f, 2.5f };
+        internal static readonly string[] Names = { "STANDARD", "+20%", "+40%", "+70%", "2X" };
+        internal static readonly float[] Areas = { 1f, 1.2f, 1.4f, 1.7f, 2f };
+        // Overlap and doorway trimming damp the smallest increases. These
+        // sampled-generation adjustments bring the resulting floor areas closer
+        // to the displayed targets without increasing the maximum above 2x.
+        private static readonly float[] GenerationAreas = { 1f, 1.3f, 1.5f, 1.75f, 2f };
         internal static int Index => Mathf.Clamp(Setting.Value, 0, Names.Length - 1);
+        internal static float Area(SpaceshipGenerator generator) => Plugin.Local && generator.GetShipSize() != generator.numberOfRoomsMini ? GenerationAreas[Index] : 1f;
+    }
+
+    [HarmonyPatch(typeof(SpaceshipGenerator), "RandomizeRooms")]
+    internal static class RoomDimensions
+    {
+        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            var random = AccessTools.Method(typeof(SpaceshipGenerator), "RandomRange", new[] { typeof(int), typeof(int) });
+            int matches = 0;
+            foreach (var instruction in instructions)
+            {
+                // The first four draws choose width/height, including the initial
+                // room. The remaining two draws choose placement and stay stock.
+                if (instruction.Calls(random) && ++matches <= 4)
+                {
+                    instruction.opcode = OpCodes.Call;
+                    instruction.operand = AccessTools.Method(typeof(RoomDimensions), nameof(Draw));
+                }
+                yield return instruction;
+            }
+            if (matches != 6) throw new InvalidOperationException("Unexpected room dimension draws.");
+        }
+        private static int Draw(SpaceshipGenerator generator, int min, int max)
+        {
+            int original = generator.RandomRange(min, max);
+            float area = RoomSizes.Area(generator);
+            if (area == 1f) return original;
+            // Keep each original random dimension and its variation. Fractional
+            // growth is rounded probabilistically, avoiding whole-tile jumps at
+            // every setting. Use the ship's seeded RNG for reproducibility.
+            float interior = (original - 2) * Mathf.Sqrt(area);
+            int floor = Mathf.FloorToInt(interior);
+            return 2 + floor + (generator.RandomRange(0f, 1f) < interior - floor ? 1 : 0);
+        }
     }
 
     // Apply before the coroutine allocates its tile matrix; retries reuse the
@@ -75,13 +114,14 @@ namespace OutOfSpace.MorePlayers
                 captured = true;
             }
             bool active = Plugin.Local && generator.GetShipSize() != generator.numberOfRoomsMini;
-            float scale = active ? RoomSizes.Scales[RoomSizes.Index] : 1f;
-            generator.minRoomSize = scale == 1f ? min : Mathf.CeilToInt((min - 2) * scale) + 2;
-            generator.maxRoomsize = scale == 1f ? max : Mathf.CeilToInt((max - 3) * scale) + 3;
+            float area = RoomSizes.Area(generator);
+            float scale = Mathf.Sqrt(area);
+            generator.minRoomSize = min;
+            generator.maxRoomsize = max;
             generator.radius = Mathf.CeilToInt(radius * scale);
-            generator.maxRoomCells = Mathf.CeilToInt(cells * scale * scale);
+            generator.maxRoomCells = Mathf.RoundToInt(cells * area);
             Plugin.Log.LogInfo("Room size " + (active ? RoomSizes.Names[RoomSizes.Index] : "STANDARD") +
-                ": dimensions=" + generator.minRoomSize + ".." + (generator.maxRoomsize - 1) +
+                ": target floor-area multiplier=" + (active ? RoomSizes.Areas[RoomSizes.Index] : 1f) + ", generation multiplier=" + area +
                 ", room cell cap=" + generator.maxRoomCells + ", requested rooms=" + generator.GetShipSize());
         }
     }

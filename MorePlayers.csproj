@@ -3,7 +3,7 @@
     <TargetFramework>net472</TargetFramework>
     <LangVersion>latest</LangVersion>
     <AssemblyName>OutOfSpace.MorePlayers</AssemblyName>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <GameDir Condition="'$(GameDir)' == ''">G:\SteamLibrary\steamapps\common\Out of Space</GameDir>
     <BepInExDir Condition="'$(BepInExDir)' == ''">$(GameDir)\BepInEx</BepInExDir>
     <Managed>$(GameDir)\Out of Space_Data\Managed</Managed>
