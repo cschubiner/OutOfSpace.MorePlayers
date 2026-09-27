@@ -17,6 +17,21 @@ The keyboard shares its configured player slot with that player's controller, as
 
 ## Configuration
 
+### Room size
+
+The local lobby has a separate **ROOM SIZE** button. Click it or press Confirm to cycle choices; left/right adjusts it when selected. The choice is saved and applies to newly generated ships, including a match restart.
+
+| Setting | Interior dimension multiplier |
+| --- | --- |
+| Standard | Original game |
+| Roomy | 1.5× |
+| Spacious (default) | 2× |
+| Vast | 2.5× |
+
+These change the room-generation dimensions and floor-area limit. Small/Medium/Large still determines the requested number of rooms. Bigger rooms naturally spread the ship across more space; actual floor area varies with the seed and overlapping room shapes. Players, furniture, and doors keep their normal size. Online games and the tutorial retain the original room sizes.
+
+The setting is also available as `[Rooms] Size = 0/1/2/3` in the configuration file. The plugin corrects a stock entrance-floor sorting bug that otherwise crashes dirt placement in larger rooms.
+
 The game creates `BepInEx/config/local.outofspace.moreplayers.cfg` on first launch. Close the game before editing.
 
 ```ini
@@ -28,11 +43,16 @@ DisableXInput = false
 
 [Diagnostics]
 ShowOverlay = false
+
+[Rooms]
+Size = 2
 ```
 
-`MaxLocalPlayers` accepts 4–16. All changes require restarting the game, except the F8 display toggle.
+`MaxLocalPlayers` accepts 4–16. Player-count and input-backend changes require restarting the game. Room size takes effect on the next generated ship; F8 toggles diagnostics immediately.
 
 `DisableXInput = false` preserves the native input backend, including Xbox vibration and mappings. Classic XInput exposes at most four Xbox-style devices; other natively detected controllers can fill additional slots. The current mixed setup enumerated six devices: four XInput controllers, a DualSense, and a DualShock 4.
+
+Version 0.2.0 includes standard gameplay mappings for an otherwise unmapped DualSense. The tested Switch Pro raw-input reports produced false button presses, so automatic Switch Pro mappings are disabled to prevent menu skipping. Device detection alone does not guarantee usable input.
 
 `DisableXInput = true` requests the installed Rewired Raw Input backend without XInput. This is an experimental option for larger Xbox-heavy mixes; hardware detection, trigger mappings, and rumble need checking. It is not a promise that every Windows controller combination will work. Avoid wrapping every controller as XInput when you need more than four XInput devices. See [Rewired's input guidance](https://guavaman.com/projects/rewired/docs/HowTos.html) and [known issues](https://guavaman.com/projects/rewired/docs/KnownIssues.html).
 
@@ -59,7 +79,7 @@ The automated test also includes screenshots of the [sixteen-player game](sixtee
 
 Additional gameplay screenshot provided by Clay.
 
-This remains a prototype: expect crowding on small ships, repeated clothing textures, and possible balance issues. P1–P16 labels and colored indicators distinguish players. Ship size and achievements are unchanged. Use the ship sizes your save already unlocks.
+This remains a prototype: expect repeated clothing textures and possible balance issues. P1–P16 labels and colored indicators distinguish players. Larger rooms add walking and cleaning space; start with Spacious and adjust to taste. Ship-size unlocks and achievements are unchanged by this plugin.
 
 ## Install, build, disable
 

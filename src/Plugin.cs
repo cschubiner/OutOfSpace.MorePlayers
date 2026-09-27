@@ -16,7 +16,7 @@ using UnityEngine.SceneManagement;
 
 namespace OutOfSpace.MorePlayers
 {
-    [BepInPlugin(Id, "More Local Players", "0.1.0")]
+    [BepInPlugin(Id, "More Local Players", "0.2.0")]
     public sealed class Plugin : BaseUnityPlugin
     {
         public const string Id = "local.outofspace.moreplayers";
@@ -38,6 +38,8 @@ namespace OutOfSpace.MorePlayers
         private void Awake()
         {
             Log = Logger;
+            RoomSizes.Setting = Config.Bind("Rooms", "Size", 2,
+                new ConfigDescription("Room size: 0 Standard, 1 Roomy, 2 Spacious, 3 Vast. Also adjustable in the local lobby. Applies to newly generated ships.", new AcceptableValueRange<int>(0, 3)));
             Limit = Config.Bind("Players", "MaxLocalPlayers", 16,
                 new ConfigDescription("Restart required. Local slots, from four to sixteen. Hardware controller capacity depends on the input backend.", new AcceptableValueRange<int>(4, 16))).Value;
             RawInput = Config.Bind("Input", "DisableXInput", false,
@@ -58,7 +60,7 @@ namespace OutOfSpace.MorePlayers
                 foreach (var method in typeof(GameValue).GetMethods().Where(m => m.Name == "op_Implicit"))
                     harmony.Patch(method, transpiler: new HarmonyMethod(typeof(Plugin), nameof(ClampBalanceCount)));
                 Ready = true;
-                Log.LogInfo("More Local Players 0.1.0 enabled; configured slots=" + Limit + "; F8 diagnostics.");
+                Log.LogInfo("More Local Players 0.2.0 enabled; configured slots=" + Limit + "; F8 diagnostics.");
             }
             catch (Exception ex)
             {
@@ -122,8 +124,10 @@ namespace OutOfSpace.MorePlayers
         {
             if (Input.GetKeyDown(KeyCode.F8)) overlay = !overlay;
             ControllerAssignments.Capture();
+            InputActivity.Capture();
             if (!ReInput.isReady || Time.unscaledTime < nextReport) return;
             nextReport = Time.unscaledTime + 3;
+            ControllerProfiles.EnsureMaps();
             status = Diagnostics();
             // Local file only; no network listener or telemetry.
             try { File.WriteAllText(Path.Combine(Paths.BepInExRootPath, "MorePlayers-status.txt"), status); }
@@ -132,14 +136,16 @@ namespace OutOfSpace.MorePlayers
 
         internal static string Diagnostics()
         {
-            var lines = new List<string> { "More Local Players 0.1.0 | " + SceneManager.GetActiveScene().name,
+            var lines = new List<string> { "More Local Players 0.2.0 | " + SceneManager.GetActiveScene().name,
                 "Configured: " + Limit + " | logical players: " + ReInput.players.playerCount + " | detected controllers: " + ReInput.controllers.joystickCount,
                 "Mode: " + (Local ? "Local" : "Online (stock four-player limit)") };
             foreach (var p in ReInput.players.Players)
                 lines.Add("P" + (p.id + 1) + ": " + string.Join(", ", p.controllers.Joysticks.Select(j => "#" + j.id + " " + j.name).ToArray()) +
-                    (p.controllers.hasKeyboard ? " + keyboard" : "") + " | move " + p.GetAxis("MoveHorizontal").ToString("0.00") + ", " + p.GetAxis("MoveVertical").ToString("0.00"));
+                    (p.controllers.hasKeyboard ? " + keyboard" : "") + " | move " + p.GetAxis("MoveHorizontal").ToString("0.00") + ", " + p.GetAxis("MoveVertical").ToString("0.00") + InputActivity.Describe(p));
             if (MultiplayerManager.instance != null)
                 lines.Add("Roster: " + MultiplayerManager.instance.LocalPlayerDatas.Count + " | characters: " + MultiplayerManager.instance.playerCount);
+            if (MultiplayerManager.instance != null)
+                lines.Add("Joined input slots: " + string.Join(", ", MultiplayerManager.instance.LocalPlayerDatas.Select(p => "P" + (p.ControllerId + 1)).ToArray()));
             lines.Add("F8: show/hide diagnostics");
             return string.Join("\n", lines.ToArray());
         }
@@ -147,8 +153,8 @@ namespace OutOfSpace.MorePlayers
         private void OnGUI()
         {
             if (!overlay) return;
-            GUI.Box(new Rect(12, 12, 650, 100 + InputLimit() * 22), "");
-            GUI.Label(new Rect(24, 22, 630, 90 + InputLimit() * 22), status);
+            GUI.Box(new Rect(12, 12, 1050, 125 + InputLimit() * 22), "");
+            GUI.Label(new Rect(24, 22, 1030, 115 + InputLimit() * 22), status);
         }
     }
 }

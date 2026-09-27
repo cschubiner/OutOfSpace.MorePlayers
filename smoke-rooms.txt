@@ -1,0 +1,52 @@
+PASS room-size lobby row exists
+PASS click changes room size
+PASS left navigation decreases room size
+PASS Spacious ship loads and spawns a player
+LIVE min=6 max=15 radius=18 cells=64 rooms=6
+PASS generated rooms have doors
+PASS SMALL/0 retries do not rescale
+SAMPLE SMALL option=0 requested=6 avg floor=5.6 rooms=60 entrances=10/10
+PASS SMALL/0 all sampled ships have an entrance
+PASS SMALL/1 retries do not rescale
+SAMPLE SMALL option=1 requested=6 avg floor=13.1 rooms=60 entrances=10/10
+PASS SMALL/1 all sampled ships have an entrance
+PASS SMALL average floor area increases at option 1
+PASS SMALL/2 retries do not rescale
+SAMPLE SMALL option=2 requested=6 avg floor=24.0 rooms=60 entrances=10/10
+PASS SMALL/2 all sampled ships have an entrance
+PASS SMALL average floor area increases at option 2
+PASS SMALL/3 retries do not rescale
+SAMPLE SMALL option=3 requested=6 avg floor=43.8 rooms=60 entrances=10/10
+PASS SMALL/3 all sampled ships have an entrance
+PASS SMALL average floor area increases at option 3
+PASS MEDIUM/0 retries do not rescale
+SAMPLE MEDIUM option=0 requested=9 avg floor=5.8 rooms=89 entrances=10/10
+PASS MEDIUM/0 all sampled ships have an entrance
+PASS MEDIUM/1 retries do not rescale
+SAMPLE MEDIUM option=1 requested=9 avg floor=13.4 rooms=90 entrances=10/10
+PASS MEDIUM/1 all sampled ships have an entrance
+PASS MEDIUM average floor area increases at option 1
+PASS MEDIUM/2 retries do not rescale
+SAMPLE MEDIUM option=2 requested=9 avg floor=24.3 rooms=90 entrances=10/10
+PASS MEDIUM/2 all sampled ships have an entrance
+PASS MEDIUM average floor area increases at option 2
+PASS MEDIUM/3 retries do not rescale
+SAMPLE MEDIUM option=3 requested=9 avg floor=44.0 rooms=90 entrances=10/10
+PASS MEDIUM/3 all sampled ships have an entrance
+PASS MEDIUM average floor area increases at option 3
+PASS LARGE/0 retries do not rescale
+SAMPLE LARGE option=0 requested=12 avg floor=5.9 rooms=119 entrances=10/10
+PASS LARGE/0 all sampled ships have an entrance
+PASS LARGE/1 retries do not rescale
+SAMPLE LARGE option=1 requested=12 avg floor=13.7 rooms=120 entrances=10/10
+PASS LARGE/1 all sampled ships have an entrance
+PASS LARGE average floor area increases at option 1
+PASS LARGE/2 retries do not rescale
+SAMPLE LARGE option=2 requested=12 avg floor=25.4 rooms=120 entrances=10/10
+PASS LARGE/2 all sampled ships have an entrance
+PASS LARGE average floor area increases at option 2
+PASS LARGE/3 retries do not rescale
+SAMPLE LARGE option=3 requested=12 avg floor=44.9 rooms=120 entrances=10/10
+PASS LARGE/3 all sampled ships have an entrance
+PASS LARGE average floor area increases at option 3
+ROOM TEST COMPLETE failures=0

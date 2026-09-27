@@ -1,4 +1,22 @@
-# Validation — More Local Players 0.1.0
+# Validation history
+
+## Version 0.2.0 — room size
+
+Tested against the same installed Steam build described below, using a private game copy and synthetic input. Progression writes and Steam achievement calls were blocked in the test harness.
+
+- The local lobby creates a Room Size button; clicking cycles the saved setting, and left navigation decreases it.
+- A Spacious Small ship loads into gameplay and spawns a player, with doors on every generated room.
+- Ten seeds for each combination of Small/Medium/Large and Standard/Roomy/Spacious/Vast exercise the generation algorithm (120 combinations). These are generation checks, not 120 full playthroughs.
+- Spacious averaged about 24–25 floor cells per regular room, compared with roughly 6 for Standard. Vast averaged about 44–45. Exact results depend on generation and seed.
+- Reapplying the generation patch preserves dimensions rather than compounding the multiplier during retries.
+- The stock entrance-floor comparator failed with larger rooms; the plugin now sorts local entrance floor cells using a valid distance comparison.
+- Standard generation sometimes fails to find an entrance on the first attempt; the original game retries in that case. The harness permits up to ten attempts rather than incorrectly requiring every first attempt to succeed.
+
+The completed run reported zero failed assertions; the concise results are in `smoke-rooms.txt`. The game's pre-existing material warning and retired web-endpoint 404s also appeared during the run.
+
+Full-round balance, furniture accessibility across every seed, and sixteen-person physical-controller play with the larger rooms still need playtesting. Earlier player-count results below refer to the earlier build.
+
+## Version 0.1.0
 
 Tested on this computer against the installed Steam build 6616527 (v1.2.4b13), Unity 2018.2.21f1, Windows x64, BepInEx 5.4.23.5.
 

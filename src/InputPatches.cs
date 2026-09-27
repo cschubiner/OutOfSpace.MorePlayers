@@ -91,6 +91,7 @@ namespace OutOfSpace.MorePlayers
             }
             foreach (var p in ReInput.players.Players) p.controllers.ClearControllersOfType(ControllerType.Joystick);
             foreach (var entry in plan) ReInput.players.GetPlayer(entry.Value).controllers.AddController(entry.Key, true);
+            ControllerProfiles.EnsureMaps();
             Capture();
             Plugin.Log.LogInfo("Controller assignments: " + string.Join("; ", ReInput.players.Players.Select(p =>
                 "P" + (p.id + 1) + "=" + string.Join(",", p.controllers.Joysticks.Select(j => j.name + " [" + j.deviceInstanceGuid + "]").ToArray())).ToArray()));
